@@ -17,5 +17,11 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="library" name="Maven: org.xmlunit:xmlunit-core:2.10.0" level="project" />
+    <orderEntry type="library" name="Maven: org.mapstruct:mapstruct:1.5.5.Final" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: jakarta.validation:jakarta.validation-api:3.0.2" level="project" />
+    <orderEntry type="library" name="Maven: com.github.docker-java:docker-java-api:3.4.1" level="project" />
+    <orderEntry type="library" name="Maven: com.github.docker-java:docker-java-api:3.4.1" level="project" />
   </component>
 </module>
