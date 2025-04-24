@@ -1,37 +1,27 @@
-package com.app.citas.model;
+package com.app.citas.dto;
 
-import jakarta.persistence.*;
 import jakarta.validation.constraints.Future;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-@Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
-public class Appointment {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@NoArgsConstructor
+@Builder
+public class AppointmentDTO {
     private Long id;
-    @ManyToOne
-    private Patient patient;
 
-    @ManyToOne
-    private Doctor doctor;
-
-    @ManyToOne
-    private ConsultRoom consultRoom;
-
+    private PatientDTO patient;
+    private DoctorDTO doctor;
+    private ConsultRoomDTO  consultRoom;
     @Future
     private LocalDateTime startTime;
     @Future
     private LocalDateTime endTime;
-
-    @Enumerated(EnumType.STRING)
     private Status status;
 
     public enum Status {
