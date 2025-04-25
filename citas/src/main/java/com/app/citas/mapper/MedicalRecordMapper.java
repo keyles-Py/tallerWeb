@@ -4,7 +4,7 @@ import com.app.citas.dto.MedicalRecordDTO;
 import com.app.citas.model.MedicalRecord;
 import org.mapstruct.Mapper;
 
-@Mapper(componentModel = "Spring")
+@Mapper(componentModel = "spring", uses = {AppointmentMapper.class})
 public interface MedicalRecordMapper {
     MedicalRecordDTO toDTO(MedicalRecord medicalRecord);
     MedicalRecord toEntity(MedicalRecordDTO medicalRecordDTO);

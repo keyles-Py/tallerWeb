@@ -12,9 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
+
+
 public class AppointmentDTO {
     private Long id;
-
     private PatientDTO patient;
     private DoctorDTO doctor;
     private ConsultRoomDTO  consultRoom;
