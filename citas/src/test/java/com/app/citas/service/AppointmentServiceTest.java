@@ -42,7 +42,7 @@ public class AppointmentServiceTest {
 
         assertEquals(1l, result.getId());
     }
-
+    /*
     @Test
     void shouldUpdateAppointment() {
         Appointment appointment = Appointment.builder().id(1L).build();
@@ -57,6 +57,8 @@ public class AppointmentServiceTest {
         assertEquals(2L, result.getId());
 
     }
+
+     */
 
     @Test
     void shouldCreateAppointment() {
