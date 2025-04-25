@@ -11,10 +11,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
+import static com.github.dockerjava.zerodep.shaded.org.apache.hc.core5.http.io.support.ClassicRequestBuilder.post;
 import static net.bytebuddy.matcher.ElementMatchers.any;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
@@ -52,6 +55,22 @@ public class AppointmentServiceTest {
         AppointmentDTO result = appointmentService.updateAppointment(1L, appointmentDTO);
 
         assertEquals(2L, result.getId());
+
+    }
+
+    @Test
+    void shouldCreateAppointment() {
+        AppointmentDTO dto = AppointmentDTO.builder().id(1L).status(AppointmentDTO.Status.SCHEDULED).startTime(LocalDateTime.now().plusDays(2)).endTime(LocalDateTime.now().plusDays(2).plusHours(2)).build();
+        Appointment appointment = Appointment.builder().id(1L).status(Appointment.Status.SCHEDULED).startTime(LocalDateTime.now().plusDays(2)).endTime(LocalDateTime.now().plusDays(2).plusHours(2)).build();
+
+        when(appointmentMapper.toEntity(dto)).thenReturn(appointment);
+        when(appointmentRepository.save(appointment)).thenReturn(appointment);
+        when(appointmentMapper.toDTO(appointment)).thenReturn(dto);
+
+        AppointmentDTO result = appointmentService.createAppointment(dto);
+
+        assertEquals(AppointmentDTO.Status.SCHEDULED, result.getStatus());
+        verify(appointmentRepository).save(appointment);
 
     }
 }
