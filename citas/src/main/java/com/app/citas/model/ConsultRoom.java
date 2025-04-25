@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 public class ConsultRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
     private String name;
     private String floor;
     private String description;

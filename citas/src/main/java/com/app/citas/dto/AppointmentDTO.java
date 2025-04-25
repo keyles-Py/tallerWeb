@@ -1,5 +1,8 @@
 package com.app.citas.dto;
 
+import com.app.citas.model.ConsultRoom;
+import com.app.citas.model.Doctor;
+import com.app.citas.model.Patient;
 import jakarta.validation.constraints.Future;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,13 +15,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-
-
 public class AppointmentDTO {
     private Long id;
-    private PatientDTO patient;
-    private DoctorDTO doctor;
-    private ConsultRoomDTO  consultRoom;
+    private Patient patient;
+    private Doctor doctor;
+    private ConsultRoom consultRoom;
     @Future
     private LocalDateTime startTime;
     @Future

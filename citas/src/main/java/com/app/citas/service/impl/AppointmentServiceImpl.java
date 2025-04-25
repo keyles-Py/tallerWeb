@@ -25,7 +25,8 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
     private  final AppointmentRepository appointmentRepository;
-    private  AppointmentMapper appointmentMapper;
+
+    private  final AppointmentMapper appointmentMapper;
 
     private  final PatientRepository patientRepository;
 
@@ -59,12 +60,12 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentMapper.toDTO(saved);
     }
 
-    @Override
-    public List<AppointmentDTO> getAllApoAppointment(Long id) {
-        return List.of();
-    }
+    //@Override
+    //public List<AppointmentDTO> getAllAppointment(Long id) {
+    //    return List.of();
+    //}
 
-    public List<AppointmentDTO> getAllAppointments(Long id) {
+    public List<AppointmentDTO> getAllAppointments() {
         return appointmentRepository.findAll().stream()
                 .map(appointmentMapper::toDTO)
                 .collect(Collectors.toList());
@@ -94,6 +95,17 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentRepository.findAppointmentByConsultRoom(room).stream()
                 .map(appointmentMapper::toDTO)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public AppointmentDTO updateAppointment(Long id, AppointmentDTO dto) {
+        Appointment appointment = appointmentRepository.findAppointmentById(id)
+                .orElseThrow(() -> new RuntimeException("Appointment not found"));
+        appointment.setDoctor(dto.getDoctor());
+        appointment.setPatient(dto.getPatient());
+        appointment.setConsultRoom(dto.getConsultRoom());
+
+        return appointmentMapper.toDTO(appointmentRepository.save(appointment));
     }
 
     @Override

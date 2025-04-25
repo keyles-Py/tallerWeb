@@ -9,10 +9,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface AppointmentRepository extends JpaRepository<Appointment, Long> {
-    Appointment findAppointmentById(Long id);
+    Optional<Appointment> findAppointmentById(Long id);
     Appointment findAppointmentsByPatient(Patient patient);
     List<Appointment> findAppointmentsByDoctor(Doctor doctor);
     List<Appointment> findAppointmentsByPatientAndDoctor(Patient patient, Doctor doctor);
