@@ -15,6 +15,9 @@ import com.app.citas.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,22 +41,49 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDTO createAppointment(AppointmentDTO dto) {
         Appointment appointment = appointmentMapper.toEntity(dto);
 
+
+        Patient patient;
+        Doctor doctor = null;
+        ConsultRoom room = null;
+        LocalDateTime dateTime = dto.getStartTime();
+
+
         if (dto.getPatient() != null && dto.getPatient().getId() != null) {
-            Patient patient = patientRepository.findById(dto.getPatient().getId())
+            patient = patientRepository.findById(dto.getPatient().getId())
                     .orElseThrow(() -> new RuntimeException("Patient not found"));
             appointment.setPatient(patient);
         }
 
+
         if (dto.getDoctor() != null && dto.getDoctor().getId() != null) {
-            Doctor doctor = doctorRepository.findById(dto.getDoctor().getId())
+            doctor = doctorRepository.findById(dto.getDoctor().getId())
                     .orElseThrow(() -> new RuntimeException("Doctor not found"));
             appointment.setDoctor(doctor);
         }
 
+
         if (dto.getConsultRoom() != null && dto.getConsultRoom().getId() != null) {
-            ConsultRoom room = consultRoomRepository.findById(dto.getConsultRoom().getId())
+            room = consultRoomRepository.findById(dto.getConsultRoom().getId())
                     .orElseThrow(() -> new RuntimeException("Consult room not found"));
             appointment.setConsultRoom(room);
+        }
+
+
+        if (doctor != null && dateTime != null &&
+                appointmentRepository.existsByDoctorAndDateTime(doctor, dateTime)) {
+            throw new RuntimeException("This doctor is already booked  " + dateTime);
+        }
+
+        if (dateTime != null) {
+            LocalTime appointmentTime = dateTime.toLocalTime();
+            if (appointmentTime.isBefore(doctor.getAvailableFrom()) || appointmentTime.isAfter(doctor.getAvailableTo())) {
+                throw new RuntimeException("This appointment is outside of the doctor's available hours.");
+            }
+        }
+
+        if (room != null && dateTime != null &&
+                appointmentRepository.existsByConsultRoomAndDateTime(room, dateTime)) {
+            throw new RuntimeException("This consult room is already booked " + dateTime);
         }
 
         Appointment saved = appointmentRepository.save(appointment);

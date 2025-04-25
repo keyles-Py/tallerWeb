@@ -24,12 +24,24 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     @Override
     public MedicalRecordDTO createMedicalRecord(MedicalRecordDTO dto) {
         MedicalRecord entity = medicalRecordMapper.toEntity(dto);
+        Long appointment_Id = dto.getAppointment().getId();
+
 
         if (dto.getAppointment() != null && dto.getAppointment().getId() != null) {
-            Appointment appointment = appointmentRepository.findById(dto.getAppointment().getId())
-                    .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + dto.getAppointment().getId()));
+            Long appointmentId = dto.getAppointment().getId();
+            Appointment appointment = appointmentRepository.findById(appointmentId)
+                    .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + appointmentId));
+
+            List<MedicalRecord> existingRecords = medicalRecordRepository.findMedicalRecordByAppointment(appointment);
+            if (!existingRecords.isEmpty()) {
+                throw new RuntimeException("A medical record already exists");
+            }
+
             entity.setAppointment(appointment);
+        } else {
+            throw new RuntimeException("Appointment information is required");
         }
+
 
         MedicalRecord saved = medicalRecordRepository.save(entity);
         return medicalRecordMapper.toDTO(saved);
