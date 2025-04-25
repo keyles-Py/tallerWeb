@@ -16,7 +16,7 @@ public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
 
     @Override
-    public createPatient(PatientDTO dto){
+    public PatientDTO createPatient(PatientDTO dto){
         Patient patient = patientMapper.toPatient(dto);
         return patientMapper.toPatientDTO(patientRepository.save(patient));
     }
