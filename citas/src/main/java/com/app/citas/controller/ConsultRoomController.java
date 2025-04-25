@@ -1,6 +1,7 @@
 package com.app.citas.controller;
 
 import com.app.citas.dto.ConsultRoomDTO;
+import com.app.citas.service.ConsultRoomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,7 +18,7 @@ public class ConsultRoomController {
 
     @PostMapping
     public ResponseEntity<ConsultRoomDTO> createUser(@Valid @RequestBody ConsultRoomDTO dto) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(consultRoomService.createconsultRoom(dto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(consultRoomService.createConsultRoom(dto));
     }
 
     @GetMapping
@@ -27,7 +28,7 @@ public class ConsultRoomController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ConsultRoomDTO> getConsultRoomById(@PathVariable Long id) {
-        return ResponseEntity.ok(consultRoomService.getConsultRoomById(id));
+        return ResponseEntity.ok(consultRoomService.getById(id));
     }
 
     @PutMapping("/{id}")

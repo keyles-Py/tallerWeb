@@ -1,6 +1,7 @@
 package com.app.citas.controller;
 
 import com.app.citas.dto.AppointmentDTO;
+import com.app.citas.service.AppointmentService;
 import com.app.citas.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -23,13 +24,13 @@ public class AppointmentController {
     }
 
     @GetMapping
-    public ResponseEntity<List<AppointmentDTO>> listAppointments(@Valid @RequestBody AppointmentDTO dto) {
-        return ResponseEntity.ok(appointmentService.listAppointments());
+    public ResponseEntity<List<AppointmentDTO>> getAllAppointments() {
+        return ResponseEntity.ok(appointmentService.getAllApoAppointment());
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<AppointmentDTO> getAppointmentById(@PathVariable Long id) {
-        return ResponseEntity.ok(appointmentService.getAppointmentById(id));
+        return ResponseEntity.ok(appointmentService.getAppointment(id));
     }
 
     @PutMapping("/{id}")

@@ -29,12 +29,12 @@ public class DoctorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDTO> getDoctor(@PathVariable Long id){
-        return ResponseEntity.ok(doctorService.getDoctorbyId(id));
+        return ResponseEntity.ok(doctorService.getDoctorById(id));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<DoctorDTO>  updateDoctor(@PathVariable Long id, @RequestBody DoctorDTO doctorDTO){
-        return ResponseEntity.ok(doctorService.update(id,doctorDTO));
+        return ResponseEntity.ok(doctorService.updateDoctor(id,doctorDTO));
     }
 
     @DeleteMapping("/{id}")

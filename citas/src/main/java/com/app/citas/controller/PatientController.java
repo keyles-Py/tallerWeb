@@ -24,6 +24,7 @@ public class PatientController {
 
     @GetMapping
     public ResponseEntity<List<PatientDTO>> getAllUsers() {
+
         return ResponseEntity.ok(patientService.listPatients());
     }
 
