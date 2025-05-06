@@ -17,8 +17,8 @@ import java.io.IOException;
 
 @Component
 @AllArgsConstructor
-public class jwtFilter extends OncePerRequestFilter {
-    private final jwtUtil jwtUtil;
+public class JwtFilter extends OncePerRequestFilter {
+    private final JwtUtil jwtUtil;
     private final UserDetailsService userDetailsService;
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

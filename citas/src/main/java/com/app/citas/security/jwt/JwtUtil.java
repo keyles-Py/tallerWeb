@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 
 @Component
-public class jwtUtil {
+public class JwtUtil {
     private final SecretKey key;
     private final Long expiration;
 
