@@ -5,7 +5,6 @@ import com.app.citas.model.ConsultRoom;
 import com.app.citas.model.Doctor;
 import com.app.citas.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -19,7 +18,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, Long> 
     List<Appointment> findAppointmentsByDoctor(Doctor doctor);
     List<Appointment> findAppointmentsByPatientAndDoctor(Patient patient, Doctor doctor);
     List<Appointment> findAppointmentByConsultRoom(ConsultRoom consultRoom);
-    boolean existsByDoctorAndDateTime(Doctor doctor, LocalDateTime startTime);
-    boolean existsByConsultRoomAndDateTime(ConsultRoom consultRoom, LocalDateTime dateTime);
+    boolean existsByDoctorAndStartTime(Doctor doctor, LocalDateTime StartTime);
+    boolean existsByConsultRoomAndStartTime(ConsultRoom consultRoom, LocalDateTime StartTime);
 
 }

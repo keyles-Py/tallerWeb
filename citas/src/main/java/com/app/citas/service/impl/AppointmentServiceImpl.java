@@ -13,7 +13,6 @@ import com.app.citas.repositories.DoctorRepository;
 import com.app.citas.repositories.PatientRepository;
 import com.app.citas.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -70,7 +69,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
         if (doctor != null && dateTime != null &&
-                appointmentRepository.existsByDoctorAndDateTime(doctor, dateTime)) {
+                appointmentRepository.existsByDoctorAndStartTime(doctor, dateTime)) {
             throw new RuntimeException("This doctor is already booked  " + dateTime);
         }
 
@@ -82,7 +81,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         }
 
         if (room != null && dateTime != null &&
-                appointmentRepository.existsByConsultRoomAndDateTime(room, dateTime)) {
+                appointmentRepository.existsByConsultRoomAndStartTime(room, dateTime)) {
             throw new RuntimeException("This consult room is already booked " + dateTime);
         }
 

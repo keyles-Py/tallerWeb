@@ -10,7 +10,7 @@ import java.util.List;
 
 @Repository
 public interface MedicalRecordRepository extends JpaRepository<MedicalRecord,Long> {
-    MedicalRecord findMedicalRecordById(String fullName);
+    MedicalRecord findMedicalRecordById(Long id);
     List<MedicalRecord> findMedicalRecordByAppointment(Appointment appointment);
 
 }
