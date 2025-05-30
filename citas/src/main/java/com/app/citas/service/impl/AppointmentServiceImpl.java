@@ -15,7 +15,6 @@ import com.app.citas.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.security.Security;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
