@@ -6,24 +6,27 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+
 @RestController
 @RequestMapping("/api/patients")
 @RequiredArgsConstructor
+@PreAuthorize("hasAnyRole('PATIENT', 'ADMIN')")
 public class PatientController {
+
     private final PatientService patientService;
 
     @PostMapping
     public ResponseEntity<PatientDTO> createPatient(@RequestBody PatientDTO patientDTO){
-        return  ResponseEntity.status(HttpStatus.CREATED).body(patientService.createPatient(patientDTO));
+        return ResponseEntity.status(HttpStatus.CREATED).body(patientService.createPatient(patientDTO));
     }
 
     @GetMapping
     public ResponseEntity<List<PatientDTO>> getAllUsers() {
-
         return ResponseEntity.ok(patientService.listPatients());
     }
 
