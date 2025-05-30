@@ -13,6 +13,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
-
+@RequestMapping("/api/auth")
 public class UserController {
     private final UserService userService;
     private final JwtUtil jwtUtil;
