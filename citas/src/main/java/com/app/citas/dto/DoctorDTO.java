@@ -14,7 +14,7 @@ import java.time.LocalTime;
 @AllArgsConstructor
 @Builder
 public class DoctorDTO {
-    private Long id;
+
 
     @NotBlank
     private String fullName;

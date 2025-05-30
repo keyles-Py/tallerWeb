@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class ConsultRoomDTO {
-    private Long id;
     private String name;
     private String floor;
     private String description;

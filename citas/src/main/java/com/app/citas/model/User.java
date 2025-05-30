@@ -14,6 +14,8 @@ import java.util.Set;
 public class User {
     @Id @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    private String firstName;
+    private String lastName;
     private String username;
     private String password;
     private String email;
@@ -24,4 +26,9 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id")
     )
     private Set<Role> roles;
+
+    public void addRole(Role r) {
+        roles.add(r);
+        r.getUsers().add(this);
+    }
 }

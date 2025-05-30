@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-29T10:57:33-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
+    date = "2025-05-30T00:31:40-0500",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
 )
 @Component
 public class ConsultRoomMapperImpl implements ConsultRoomMapper {
@@ -21,7 +21,6 @@ public class ConsultRoomMapperImpl implements ConsultRoomMapper {
 
         ConsultRoomDTO.ConsultRoomDTOBuilder consultRoomDTO = ConsultRoomDTO.builder();
 
-        consultRoomDTO.id( consultRoom.getId() );
         consultRoomDTO.name( consultRoom.getName() );
         consultRoomDTO.floor( consultRoom.getFloor() );
         consultRoomDTO.description( consultRoom.getDescription() );
@@ -37,7 +36,6 @@ public class ConsultRoomMapperImpl implements ConsultRoomMapper {
 
         ConsultRoom consultRoom = new ConsultRoom();
 
-        consultRoom.setId( consultRoomDTO.getId() );
         consultRoom.setName( consultRoomDTO.getName() );
         consultRoom.setFloor( consultRoomDTO.getFloor() );
         consultRoom.setDescription( consultRoomDTO.getDescription() );

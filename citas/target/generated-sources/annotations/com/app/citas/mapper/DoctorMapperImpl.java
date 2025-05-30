@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-05-29T10:57:33-0500",
-    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 20.0.2 (Oracle Corporation)"
+    date = "2025-05-30T00:31:40-0500",
+    comments = "version: 1.5.5.Final, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
 )
 @Component
 public class DoctorMapperImpl implements DoctorMapper {
@@ -21,7 +21,6 @@ public class DoctorMapperImpl implements DoctorMapper {
 
         DoctorDTO.DoctorDTOBuilder doctorDTO = DoctorDTO.builder();
 
-        doctorDTO.id( doctor.getId() );
         doctorDTO.fullName( doctor.getFullName() );
         doctorDTO.email( doctor.getEmail() );
         doctorDTO.availableFrom( doctor.getAvailableFrom() );
@@ -38,7 +37,6 @@ public class DoctorMapperImpl implements DoctorMapper {
 
         Doctor doctor = new Doctor();
 
-        doctor.setId( doctorDTO.getId() );
         doctor.setFullName( doctorDTO.getFullName() );
         doctor.setEmail( doctorDTO.getEmail() );
         doctor.setAvailableFrom( doctorDTO.getAvailableFrom() );

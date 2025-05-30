@@ -15,6 +15,7 @@ import com.app.citas.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.security.Security;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -113,7 +114,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDTO> getAppointmentByConsultRoom(ConsultRoomDTO consultRoomDTO) {
-        ConsultRoom room = consultRoomRepository.findById(consultRoomDTO.getId())
+        ConsultRoom room = consultRoomRepository.findConsultRoomByFloor(consultRoomDTO.getFloor())
+                .stream()
+                .findFirst()
                 .orElseThrow(() -> new RuntimeException("Consult room not found"));
 
         return appointmentRepository.findAppointmentByConsultRoom(room).stream()
