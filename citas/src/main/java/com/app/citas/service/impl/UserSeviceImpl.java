@@ -38,11 +38,12 @@ public class UserSeviceImpl implements UserService {
         usuario.setFirstName(dto.getFirstName());
         usuario.setLastName(dto.getLastName());
         usuario.setEmail(dto.getEmail());
+        usuario.setUsername(dto.getUsername());
         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
         usuario.addRole(rol);
 
 
-        User usuarioGuardado  = userRepository.save(usuario);
+        User usuarioGuardado = userRepository.save(usuario);
     }
 
     @Override

@@ -6,6 +6,7 @@ import com.app.citas.model.Role;
 import com.app.citas.model.User;
 import com.app.citas.repositories.RoleRepository;
 import com.app.citas.repositories.UserRepository;
+import lombok.Data;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,15 +24,18 @@ public class UserInfoService implements UserDetailsService {
     private final UserRepository usuarioRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserInfoService(UserRepository usuarioRepository, PasswordEncoder passwordEncoder) {
+
+    public UserInfoService(UserRepository usuarioRepository, PasswordEncoder passwordEncoder){
         this.usuarioRepository = usuarioRepository;
         this.passwordEncoder = passwordEncoder;
     }
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         Optional<User> usuarioDetail = usuarioRepository.findByEmail(email);
-        return usuarioDetail.map(UserInfoDetail::new).orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con correo: " + email));
+        return usuarioDetail.map(UserInfoDetail::new)
+                .orElseThrow(() -> new UsernameNotFoundException("Usuario no encontrado con correo: " + email));
     }
+
 
     public void addUsuario(UserDTO dto) {
         Role rol = rolUsuarioRepository.findByName(dto.getRole().getName())
@@ -41,6 +45,7 @@ public class UserInfoService implements UserDetailsService {
         usuario.setFirstName(dto.getFirstName());
         usuario.setLastName(dto.getLastName());
         usuario.setEmail(dto.getEmail());
+        usuario.setUsername(dto.getUsername());
         usuario.setPassword(passwordEncoder.encode(dto.getPassword()));
         usuario.addRole(rol);
 
@@ -48,4 +53,5 @@ public class UserInfoService implements UserDetailsService {
         User usuarioGuardado  = usuarioRepository.save(usuario);
 
     }
+
 }

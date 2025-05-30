@@ -7,9 +7,12 @@ import com.app.citas.security.service.UserInfoDetail;
 import com.app.citas.security.service.UserInfoService;
 import com.app.citas.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +22,12 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 import java.util.Map;
 
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/auth")
 public class UserController {
+    private static final Logger LOG = LoggerFactory.getLogger(UserController.class);
     private final UserService userService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authManager;
@@ -42,16 +47,10 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody Map<String, String> body) {
-        String user = body.get("email");
-        String pass = body.get("password");
-
-        if (user == null || pass == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body(Map.of("error", "email/password missing"));
-        }
-
+    public ResponseEntity<?> login(@RequestBody Map<String,String> body) {
+        String user = body.get("email"), pass = body.get("password");
+        if (user == null || pass == null)
+            return ResponseEntity.badRequest().body(Map.of("error","email/password missing"));
         try {
             authManager.authenticate(new UsernamePasswordAuthenticationToken(user, pass));
             UserDetails ud = userDetailsSvc.loadUserByUsername(user);
@@ -65,9 +64,9 @@ public class UserController {
 
             return ResponseEntity.ok(Map.of("token", token));
         } catch (Exception ex) {
-            return ResponseEntity
-                    .status(401)
-                    .body(Map.of("error", "Invalid credentials"));
+            LOG.error("login error", ex);
+            return ResponseEntity.status(401)
+                    .body(Map.of("error","Invalid credentials"));
         }
     }
 }
