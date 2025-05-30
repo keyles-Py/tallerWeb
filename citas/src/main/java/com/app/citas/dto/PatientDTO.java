@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class PatientDTO {
-
+    private Long id;
     private String fullName;
 
     @Email

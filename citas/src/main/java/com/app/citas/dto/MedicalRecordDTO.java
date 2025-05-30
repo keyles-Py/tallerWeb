@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 
 public class MedicalRecordDTO {
-
+    private Long id;
 
     private AppointmentDTO appointment;
     private String diagnosis;
