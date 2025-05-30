@@ -33,8 +33,8 @@ public class ConsultRoomServiceImpl implements ConsultRoomService {
     }
 
     @Override
-    public ConsultRoomDTO getById(Long id) {
-        return consultRoomRepository.findById(id)
+    public ConsultRoomDTO findById(Long id) {
+        return consultRoomRepository.findConsultRoomById(id)
                 .map(consultRoomMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("ConsultRoom not found with id: " + id));
     }
@@ -62,7 +62,7 @@ public class ConsultRoomServiceImpl implements ConsultRoomService {
 
     @Override
     public ConsultRoomDTO updateConsultRoom(Long id, ConsultRoomDTO dto) {
-        ConsultRoom room = consultRoomRepository.findById(id)
+        ConsultRoom room = consultRoomRepository.findConsultRoomById(id)
                 .orElseThrow(() -> new RuntimeException("ConsultRoom not found"));
 
         room.setName(dto.getName());

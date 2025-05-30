@@ -29,7 +29,7 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
 
         if (dto.getAppointment() != null && dto.getAppointment().getId() != null) {
             Long appointmentId = dto.getAppointment().getId();
-            Appointment appointment = appointmentRepository.findById(appointmentId)
+            Appointment appointment = appointmentRepository.findAppointmentById(appointmentId)
                     .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + appointmentId));
 
             List<MedicalRecord> existingRecords = medicalRecordRepository.findMedicalRecordByAppointment(appointment);

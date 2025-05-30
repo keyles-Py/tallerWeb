@@ -8,7 +8,7 @@ import java.util.List;
 public interface DoctorService {
     DoctorDTO createDoctor(DoctorDTO doctorDTO);
     List<DoctorDTO> listDoctors();
-    DoctorDTO getDoctorById(Long id);
+    DoctorDTO findDoctorById(Long id);
     DoctorDTO getDoctorByEmail(String email);
     List<DoctorDTO> findBySpecialty(String specialty);
     List<DoctorDTO> findByAvailableFrom(LocalTime from);

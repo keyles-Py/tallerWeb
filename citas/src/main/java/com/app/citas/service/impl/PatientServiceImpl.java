@@ -6,16 +6,13 @@ import com.app.citas.model.Patient;
 import com.app.citas.repositories.PatientRepository;
 import com.app.citas.service.PatientService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
 
 @RequiredArgsConstructor
 @Service
 public class PatientServiceImpl implements PatientService {
-
-    @Autowired
-    private PatientRepository patientRepository;
+    private final PatientRepository patientRepository;
     private final PatientMapper patientMapper;
 
     @Override
@@ -31,7 +28,7 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public PatientDTO getPatientById(Long id) {
-        return patientRepository.findById(id)
+        return patientRepository.findPatientById(id)
                 .map(patientMapper::toPatientDTO)
                 .orElseThrow(() -> new RuntimeException("Paciente no encontrado con ID: " + id));
     }

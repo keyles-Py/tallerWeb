@@ -2,7 +2,6 @@ package com.app.citas.controller;
 
 import com.app.citas.dto.AppointmentDTO;
 import com.app.citas.service.AppointmentService;
-import com.app.citas.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

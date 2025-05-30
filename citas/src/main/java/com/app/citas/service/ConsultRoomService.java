@@ -7,7 +7,7 @@ import java.util.List;
 public interface ConsultRoomService {
     ConsultRoomDTO createConsultRoom(ConsultRoomDTO dto);
     List<ConsultRoomDTO> listConsultRooms();
-    ConsultRoomDTO getById(Long id);
+    ConsultRoomDTO findById(Long id);
     List<ConsultRoomDTO> findByName(String name);
     List<ConsultRoomDTO> findByFloor(String floor);
     List<ConsultRoomDTO> findByFloorAndName(String floor, String name);

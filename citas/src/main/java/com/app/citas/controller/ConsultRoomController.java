@@ -28,7 +28,7 @@ public class ConsultRoomController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ConsultRoomDTO> getConsultRoomById(@PathVariable Long id) {
-        return ResponseEntity.ok(consultRoomService.getById(id));
+        return ResponseEntity.ok(consultRoomService.findById(id));
     }
 
     @PutMapping("/{id}")

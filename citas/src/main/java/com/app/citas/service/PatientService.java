@@ -1,7 +1,6 @@
 package com.app.citas.service;
 
 import com.app.citas.dto.PatientDTO;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 

@@ -55,7 +55,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
 
         if (dto.getDoctor() != null && dto.getDoctor().getId() != null) {
-            doctor = doctorRepository.findById(dto.getDoctor().getId())
+            doctor = doctorRepository.findDoctorById(dto.getDoctor().getId())
                     .orElseThrow(() -> new RuntimeException("Doctor not found"));
             appointment.setDoctor(doctor);
         }
@@ -89,11 +89,6 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentMapper.toDTO(saved);
     }
 
-    //@Override
-    //public List<AppointmentDTO> getAllAppointment(Long id) {
-    //    return List.of();
-    //}
-
     public List<AppointmentDTO> getAllAppointments() {
         return appointmentRepository.findAll().stream()
                 .map(appointmentMapper::toDTO)
@@ -102,7 +97,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public AppointmentDTO getAppointment(Long id) {
-        return appointmentRepository.findById(id)
+        return appointmentRepository.findAppointmentById(id)
                 .map(appointmentMapper::toDTO)
                 .orElseThrow(() -> new RuntimeException("Appointment not found with id: " + id));
     }

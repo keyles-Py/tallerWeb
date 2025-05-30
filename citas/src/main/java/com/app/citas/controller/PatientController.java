@@ -1,7 +1,6 @@
 package com.app.citas.controller;
 
 import com.app.citas.dto.PatientDTO;
-import com.app.citas.service.DoctorService;
 import com.app.citas.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

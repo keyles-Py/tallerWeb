@@ -5,7 +5,6 @@ import com.app.citas.service.DoctorService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,7 +28,7 @@ public class DoctorController {
 
     @GetMapping("/{id}")
     public ResponseEntity<DoctorDTO> getDoctor(@PathVariable Long id){
-        return ResponseEntity.ok(doctorService.getDoctorById(id));
+        return ResponseEntity.ok(doctorService.findDoctorById(id));
     }
 
     @PutMapping("/{id}")

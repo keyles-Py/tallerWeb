@@ -33,8 +33,8 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDTO getDoctorById(Long id) {
-        return doctorRepository.findById(id)
+    public DoctorDTO findDoctorById(Long id) {
+        return doctorRepository.findDoctorById(id)
                 .map(doctorMapper::toDto)
                 .orElseThrow(() -> new RuntimeException("Doctor not found with id: " + id));
     }

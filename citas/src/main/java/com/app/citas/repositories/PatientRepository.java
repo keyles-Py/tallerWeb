@@ -4,10 +4,12 @@ import com.app.citas.model.Patient;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface PatientRepository  extends JpaRepository<Patient, Long> {
     Patient findByEmail(String email);
-    Patient findById(long id);
+    Optional<Patient> findPatientById(long id);
     Patient findByFullName(String fullName);
     Patient findPatientByPhone(String phone);
     Boolean existsById(long id);
